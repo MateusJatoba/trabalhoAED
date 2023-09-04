@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <conio.h> // biblioteca que permite o uso do 'getch()'
 #include <locale.h> //biblioteca que permite o uso do 'setlocale()'
-#include <windows.h> //biblioteca que permite o uso das funções para o efeito da frase
+#include <windows.h> //biblioteca que permite o uso das funï¿½ï¿½es para o efeito da frase
 
 void Iniciar(){
-	//Função para o início do jogo
+	//Funï¿½ï¿½o para o inï¿½cio do jogo
 	printf("Iniciar");
 }
 
 void ESC(){
-	//Função para os créditos
-	printf("Créditos");
+	//Funï¿½ï¿½o para os crï¿½ditos
+	printf("creditos");
 }
 
 void imprimirEfeito(char *txt , int intervalo){ 
 
-// Botei esse efeito para ficar mais apresentável. Quando quiser uma frase com um efeito, bota essa função com o parâmetro do intervalo
+// Botei esse efeito para ficar mais apresentï¿½vel. Quando quiser uma frase com um efeito, bota essa funï¿½ï¿½o com o parï¿½metro do intervalo
 	
 	for(int i =0 ; txt[i] != '\0' ; i++){
 		putchar(txt[i]);
@@ -26,14 +26,14 @@ void imprimirEfeito(char *txt , int intervalo){
 int main(){
 	int teclaMenu;
 	
-	setlocale(LC_ALL , ""); // Permição de caracteres especiais (acentuação e etc)
+	setlocale(LC_ALL , ""); // Permiï¿½ï¿½o de caracteres especiais (acentuaï¿½ï¿½o e etc)
 	
-	imprimirEfeito("Bem - Vindo ao Nosso Jogo !!!\n" , 70);
+	imprimirEfeito("Bem - Vindo ao Nosso Jogo !!!\n" , 38);
 	
-	Sleep(1000);
-	imprimirEfeito("Pressione uma tecla a sua escolha:\n" , 70);
 	Sleep(500);
-	printf("<ENTER> para Iniciar \n<ESC> para os créditos \n") ;
+	imprimirEfeito("Pressione uma tecla a sua escolha:\n" , 38);
+	Sleep(500);
+	printf("<ENTER> para Iniciar \n<ESC> para os creditos \n") ;
 	
 	teclaMenu = getch();
 	
