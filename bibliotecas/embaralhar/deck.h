@@ -62,23 +62,7 @@ int top(tp_carta *e, tp_deck *p){ /*apenas copia o valor do ultimo item da pilha
 }
 }
 
-void imprime_deck(tp_deck *p){ /*realiza um pop em toda a pilha*/
-tp_carta e;
-    if (deck_vazio(p) == 1){ /*se a pilha estiver vazia*/
-        printf("Pilha_Vazia");
-    }
-    else{   
-        while (!deck_vazio(p)){ /*loop para esvaziar a pilha*/
-            pop(&e,p);
-            printf("\n Carta: %i",e.carta_id);
-            printf("\n Tipo: %i",e.tipo);
-            printf("\n Custo: %i",e.custo);
-            printf("\n Valor: %i \n",e.valor);
-        }
-        }
-}
-
-int altura_pilha(tp_deck *p){ /*mostra o tamanho da pilha*/
+int altura_deck(tp_deck *p){ /*mostra o tamanho da pilha*/
     return p->topo + 1;
 }
 
@@ -88,7 +72,7 @@ tp_carta e;
 
     inicializa_deck(&aux);
 
-    if (altura_pilha(p) + altura_pilha(p2) > MAX)
+    if (altura_deck(p) + altura_deck(p2) > MAX)
         printf("\n impossivel realizar essa funcao! limite atingido \n");
     else {
         while (!deck_vazio(p2)){ 
@@ -122,7 +106,6 @@ void ver_deck(tp_deck *p) {
     }
             
 }
-
 
 
 #endif
