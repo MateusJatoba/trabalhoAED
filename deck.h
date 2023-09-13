@@ -6,7 +6,7 @@
 typedef struct 
 {
     int vida = 75;
-    int energia;
+    int energia = 3;
     int deckPrincipal[5]; 
 } personagem;
 
