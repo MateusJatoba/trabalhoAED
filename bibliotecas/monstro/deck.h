@@ -3,19 +3,13 @@
 #include <stdio.h>
 #define MAX 100
 
-typedef struct 
-{
-    int vida = 75;
-    int energia = 3;
-    int deckPrincipal[5]; 
-} personagem;
 
 typedef struct 
 {
     int monster_id;
     int vida;
-    int moveset; 
-} monstro;
+    int moveset; // id da lista de movimentos do monstro
+} tp_monstro;
 
 typedef struct { /*criando strutura do tipo  carta*/
     int carta_id; /*numeração da carta*/
