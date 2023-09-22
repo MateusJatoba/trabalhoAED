@@ -7,13 +7,13 @@
 
 
 void mostrarMonstro(tp_monstro *m){
-    if(m->monster_id == 1){
+    if(m->monster_id == 1){//Montro 1 tem nome de JEFF
         printf("JEFF");
         printf("\nVIDA:100");
     }
 }
 
-void mostrarAcao(tp_monstro m, int rodada){
+void mostrarAcao(int rodada){
     char movSelect;
     int ValSelect;
     char mov[3] = {'a','d','e'};
@@ -42,14 +42,17 @@ void mostrarAcao(tp_monstro m, int rodada){
     }
 }
 
-    void passarRodada(int *rodada){
-        char s;
-        printf("\n\n\n\n PARA PASSAR A RODADA APERTE X");
-        scanf("%c", &s);
-        if(s=='x'){
-            rodada=rodada+1;
-        }
+int passarRodada(){
+    char s;
+    printf("\n\n\nPARA PASSAR A RODADA APERTE <ENTER>\n");
+    s = getch();
+    if(s == 13){
+        return 1;
     }
+    else{
+        return 0;
+    }
+}
 
 int main(){
 
@@ -60,12 +63,12 @@ int main(){
     jeff.vida = 100;
     jeff.moveset = 1;
 
-    while(rodada<=1){
+    while(passarRodada() != 0){
         mostrarMonstro(&jeff);
-        mostrarAcao(jeff,rodada);
-        passarRodada(&rodada);
+        mostrarAcao(rodada);
     }
 
-    printf("stop");
+    printf("\nstop");
+    // printf("%d " , rodada);
 
 }
