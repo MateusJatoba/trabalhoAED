@@ -8,14 +8,17 @@
 
 void mostrarMonstro(tp_monstro *m){
     if(m->monster_id == 1){//Montro 1 tem nome de JEFF
+        m->vida = 100; // declarando a vida do monstro
+        m->moveset = 1;
         printf("JEFF");
         printf("\nVIDA:100");
     }
 }
 
 void mostrarAcao(int rodada){
-    char movSelect;
-    int ValSelect;
+    
+    char movSelect; // Tipo de movimento (ataque, defesa e especial)
+    int ValSelect; // Valor de cada movimento
     char mov[3] = {'a','d','e'};
     int val[3] = {6,8,3};
 
@@ -28,13 +31,13 @@ void mostrarAcao(int rodada){
         
     switch (movSelect){
         case 'a':
-            printf("\nVai Atacar= %i", ValSelect);
+            printf("\nVai Atacar = %i", ValSelect);
             break;
         case 'd':
-            printf("\nVai Defender= %i", ValSelect);
+            printf("\nVai Defender = %i", ValSelect);
             break;
         case 'e':
-            printf("\nVai Lançar Magia= %i", ValSelect);
+            printf("\nVai Lançar Magia = %i", ValSelect);
             break;
 
         default:
@@ -42,11 +45,12 @@ void mostrarAcao(int rodada){
     }
 }
 
-int passarRodada(){
-    char s;
-    printf("\n\n\nPARA PASSAR A RODADA APERTE <ENTER>\n");
-    s = getch();
-    if(s == 13){
+int passarRodada(int *rodada){
+    char s; // variavel auxiliar
+    printf("\n\nPARA PASSAR A RODADA APERTE <ENTER>\n\n");
+    s = getch(); // resgata a tecla digitada
+    if(s == 13){ // se apertar enter a rodada eh incrementada
+        (*rodada) ++;
         return 1;
     }
     else{
@@ -56,19 +60,19 @@ int passarRodada(){
 
 int main(){
 
+    setlocale(LC_ALL , "portuguese");
     int rodada = 1;
-
     tp_monstro jeff;
-    jeff.monster_id = 1;
-    jeff.vida = 100;
-    jeff.moveset = 1;
 
-    while(passarRodada() != 0){
+    jeff.monster_id = 1;
+
+    mostrarMonstro(&jeff);//primeira movimentacao
+    mostrarAcao(rodada);//primeira movimentacao
+
+    while(passarRodada(&rodada) != 0){//movimentacao ate a funcao retornar 0 -> Quando o usuario n apertar enter
         mostrarMonstro(&jeff);
         mostrarAcao(rodada);
     }
 
     printf("\nstop");
-    // printf("%d " , rodada);
-
 }
