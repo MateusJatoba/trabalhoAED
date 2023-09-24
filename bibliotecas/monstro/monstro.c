@@ -23,7 +23,7 @@ void mostrarAcao(int rodada){
     int val[3] = {6,8,3};
 
     if(rodada > 3){
-        rodada = rodada-2;
+        rodada = rodada-3;
     }
 
     movSelect = mov[rodada-1];
@@ -72,6 +72,7 @@ int main(){
     while(passarRodada(&rodada) != 0){//movimentacao ate a funcao retornar 0 -> Quando o usuario n apertar enter
         mostrarMonstro(&jeff);
         mostrarAcao(rodada);
+        rodada+=1;
     }
 
     printf("\nstop");
