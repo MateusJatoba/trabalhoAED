@@ -16,7 +16,7 @@ void mostrarMonstro(tp_monstro *m){
 }
 
 void mostrarAcao(int rodada){
-    
+
     char movSelect; // Tipo de movimento (ataque, defesa e especial)
     int ValSelect; // Valor de cada movimento
     char mov[3] = {'a','d','e'};
@@ -72,7 +72,6 @@ int main(){
     while(passarRodada(&rodada) != 0){//movimentacao ate a funcao retornar 0 -> Quando o usuario n apertar enter
         mostrarMonstro(&jeff);
         mostrarAcao(rodada);
-        rodada+=1;
     }
 
     printf("\nstop");
