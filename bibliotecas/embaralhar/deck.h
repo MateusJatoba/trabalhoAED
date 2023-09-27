@@ -3,14 +3,6 @@
 #include <stdio.h>
 #define MAX 100
 
-typedef struct 
-{
-    char nome[30];
-    int vida = 75;
-    int energia = 3;
-    int deckPrincipal[5]; 
-} personagem;
-
 
 typedef struct { /*criando strutura do tipo  carta*/
     int carta_id; /*numeração da carta*/
