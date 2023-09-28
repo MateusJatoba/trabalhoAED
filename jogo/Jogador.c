@@ -3,9 +3,10 @@
 #include <conio.h> // biblioteca que permite o uso do 'getch()'
 #include <locale.h> //biblioteca que permite o uso do 'setlocale()'
 #include <windows.h> 
+#include <unistd.h>
 #include "deck.h"
 
-using namespace std;
+
 
 
 void imprimirEfeito(char *txt , int intervalo){ 
@@ -41,43 +42,82 @@ void grimgar(personagem *p){
 	p->energia ++;
 }
 
-void zephir(personagem *p){
-	//verificar o especial
-	
- }
+// void zephir(personagem *p){
+// 	//verificar o especial
+		
+// 	}
 
 void Iniciar(){
 	//Fun��o para o in�cio do jogo
-	system("cls");
+	setlocale(LC_ALL , "");
+	system("cls"); // limpa o terminal
 	imprimirEfeito("Esses sao os personagens do jogo!!" , 38);
 	printf("\n");
 	imprimirEfeito("Saphira, fada da lua - Saphira é uma fada da lua misteriosa, guardiã dos segredos noturnos e símbolo de magia noturna e tranquilidade na floresta encantada. Poder de curandeira: Comece com mais 5 pontos de Vida\n\n" , 38);
 	imprimirEfeito("Grimgar, cavaleiro abissal - Grimgar é um cavaleiro abissal enigmático e habilidoso, vestido com uma armadura negra e um elmo com chifres, cujo passado misterioso o torna temido e respeitado. Investida feroz: Adquira mais 1 ponto de energia\n\n" , 38);
-	imprimirEfeito("Zephir, mestre dos ventos - Zephir é um mestre do vento com cabelos prateados e olhos claros, hábil no controle de correntes de ar e na busca da calma na tempestade. Poder: Consiga mais uma carta no deck de batalha\n\n" , 38);
+	// imprimirEfeito("Zephir, mestre dos ventos - Zephir é um mestre do vento com cabelos prateados e olhos claros, hábil no controle de correntes de ar e na busca da calma na tempestade. Poder: Consiga mais uma carta no deck de batalha\n\n" , 38);
 	
 }
 
-void ESC(){
-	//Fun��o para os cr�ditos
-	printf("creditos");
+void creditos(){
+
+	system("cls");
+	
+	printf("Professor Orientador:\nMarcio Soussa\n");
+	printf("\nAlunos:\n");
+	printf("\nBeatriz Rosa\nDavi Passos\nMaria Luiza Queiroz\nMateus Jatoba\n");
+
+	Sleep(1500);
+
+	printf("\nAperte <ENTER> para ver nosso patrocinador");
+
+	int tecla = getch();
+	
+	if(tecla == 13){
+		system("cls");
+		char texto[] = "SmartShelf Co."; // Texto dos créditos
+    	int delay_microseconds = 100000; // Atraso entre os movimentos
+    	int largura_terminal = 90; // Largura do terminal
+
+    
+    	for (int i = 0; i < largura_terminal; i++) {// Loop para mover o texto da direita para a esquerda
+        
+        	for (int j = 0; j < i; j++) {// Imprime espaços em branco para alinhar o texto a direita
+            	putchar(' ');
+        	}
+        
+        	printf("%s", texto);// Imprime o texto
+       
+        	printf("\r"); // Limpa a linha
+
+        	usleep(delay_microseconds);// Espera um curto período de tempo
+    	}
+	}
+	
 }
+
 
 
 
 int main(){
 	int teclaMenu , aux;
+	char nome_jogador[10];
 	personagem p;
 	
-	setlocale(LC_ALL , ""); // Permi��o de caracteres especiais (acentua��o e etc)
 	
 	imprimirEfeito("Bem - Vindo ao Nosso Jogo !!!\n" , 38);
+	printf("Insira seu nome: ");
+	scanf("%s" , nome_jogador);
 	
+	system("cls");
+	
+	printf("\nOi, %s. Vamos jogar!!!\n" , nome_jogador);
 	Sleep(500);
 	imprimirEfeito("Pressione uma tecla a sua escolha:\n" , 38);
 	Sleep(500);
 	printf("<ENTER> para Iniciar \n<ESC> para os creditos \n") ;
 	
-	teclaMenu = getch();
+	teclaMenu = getch();	
 	
 	
 	if(teclaMenu == 13){
@@ -85,9 +125,10 @@ int main(){
 		imprimirEfeito("Escolha seu personagem!!!\n" , 38);
 		printf("1 - Saphira\n");
 		printf("2 - Grimgar\n");
-		printf("3 - Zephyr\n");
+
 
 		scanf("%d",&aux);
+		inicializa_personagem(&p); // funcao criada para inicializar o personagem com os valores padroes de vida e energia
 
 		switch (aux)
 		{
@@ -97,11 +138,7 @@ int main(){
 			case 2:
 				grimgar(&p);
 				break;
-				
-			// case 3:
-				
-			// 	zephir(&p);
-			// 	break;
+
 			default:
 				break;
 		}
@@ -111,6 +148,6 @@ int main(){
 	}
 	
 	if(teclaMenu == 27){
-		ESC();
+		creditos();
 	}		
 } 
