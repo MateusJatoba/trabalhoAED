@@ -42,10 +42,6 @@ void grimgar(personagem *p){
 	p->energia ++;
 }
 
-// void zephir(personagem *p){
-// 	//verificar o especial
-		
-// 	}
 
 void Iniciar(){
 	//Fun��o para o in�cio do jogo
@@ -53,10 +49,10 @@ void Iniciar(){
 	system("cls"); // limpa o terminal
 	imprimirEfeito("Esses sao os personagens do jogo!!" , 38);
 	printf("\n");
-	imprimirEfeito("Saphira, fada da lua - Saphira é uma fada da lua misteriosa, guardiã dos segredos noturnos e símbolo de magia noturna e tranquilidade na floresta encantada. Poder de curandeira: Comece com mais 5 pontos de Vida\n\n" , 38);
-	imprimirEfeito("Grimgar, cavaleiro abissal - Grimgar é um cavaleiro abissal enigmático e habilidoso, vestido com uma armadura negra e um elmo com chifres, cujo passado misterioso o torna temido e respeitado. Investida feroz: Adquira mais 1 ponto de energia\n\n" , 38);
-	// imprimirEfeito("Zephir, mestre dos ventos - Zephir é um mestre do vento com cabelos prateados e olhos claros, hábil no controle de correntes de ar e na busca da calma na tempestade. Poder: Consiga mais uma carta no deck de batalha\n\n" , 38);
-	
+	imprimirEfeito("Saphira, fada da lua - Uma fada da lua misteriosa, protetora dos segredos noturnos e figura de magia noturna e tranquilidade na floresta encantada. Poder de curandeira: Comece com mais 5 pontos de Vida\n\n" , 38);
+
+	imprimirEfeito("Grimgar, cavaleiro abissal - Um cavaleiro abissal e habilidoso, vestido com uma armadura negra e um elmo com chifres, cujo passado misterioso o torna temido e respeitado. Investida feroz: Adquira mais 1 ponto de energia\n\n" , 38);
+
 }
 
 void creditos(){
@@ -143,8 +139,8 @@ int main(){
 				break;
 		}
 		
-		printf("%d " , p.vida); // Botei isso aqui p ver se as funcoes estavam funcionando
-		printf("%d " , p.energia);
+		printf("\nPontos de Vida: %d\n" , p.vida); // Botei isso aqui p ver se as funcoes estavam funcionando
+		printf("Pontos de energia: %d\n" , p.energia);
 	}
 	
 	if(teclaMenu == 27){
