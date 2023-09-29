@@ -4,10 +4,22 @@
 #include <locale.h> //biblioteca que permite o uso do 'setlocale()'
 #include <windows.h> 
 #include "deck.h"
+#include <time.h>
 
+int random() { 
+    int r = rand() % 3; // gera binario aleatorio baseado na seed incializada na primeira chamada.
+
+    return r; // retorna aleatorio entre (0,2).
+}
+
+void gerar_seed(){
+    int seed = time(NULL);
+    printf("seed :%d\n-----------------\n\n", seed);
+    srand(seed); // semente gerada 
+}
 
 void mostrarMonstro(tp_monstro *m){
-    if(m->monster_id == 1){//Montro 1 tem nome de JEFF
+    if(m->monster_id == 1){//Monstro 1 tem nome de JEFF
         m->vida = 100; // declarando a vida do monstro
         m->moveset = 1;
         printf("JEFF");
@@ -21,7 +33,6 @@ void mostrarMonstro(tp_monstro *m){
         printf("JHONNY\n");
         printf("VIDA: %d" , m->vida);
     }
-    
 }
 
 void mostrarAcao(int rodada){
@@ -34,14 +45,21 @@ void mostrarAcao(int rodada){
     int ValSelect; // Valor de cada movimento
     char mov[3] = {'a','d','e'};
     int val[3] = {6,8,3};
+    
 
-    if(rodada > 3){
+    if(rodada > 3){ // passou do numero MAX de movimentos
         rodada = rodada-3;
     }
 
-    movSelect = mov[rodada-1];
-    ValSelect = val[rodada-1];
-        
+    if(rodada == 2){
+        movSelect = mov[random()]; // Define o movimento do monstro de maneira aleatoria.
+        ValSelect = val[random()]; // Define o valor do movimento de maneira aleatoria.
+    }
+    else{
+        movSelect = mov[rodada-1];
+        ValSelect = val[rodada-1];   
+    }
+    
     switch (movSelect){
         case 'a':
             mostrarMonstro(&monstro);//chamando a funcao para mostrar o monstro
@@ -53,15 +71,14 @@ void mostrarAcao(int rodada){
             break;
         case 'e':
             mostrarMonstro(&monstro);//chamando a funcao para mostrar o monstro
-            printf("\nVai Lançar Magia = %i", ValSelect);
+            printf("\nVai Jogar Magia = %i", ValSelect);
             break;
 
         default:
             break;
     }
 
-
-    int passarRodada(){//n possui parametro
+    int passarRodada(){ //n possui parametro
         char s; // variavel auxiliar
         printf("\n\nPARA PASSAR A RODADA APERTE <ENTER>\n\n");
         s = getch(); // resgata a tecla digitada
@@ -76,13 +93,13 @@ void mostrarAcao(int rodada){
     }
 
     passarRodada(); //novo chamado para que n precise de uma estrutura de repeticao
-   
 }
 
 
 int main(){
 
-    setlocale(LC_ALL , "portuguese");
+    gerar_seed();
+
     int rodada = 1;
 
     mostrarAcao(rodada);
