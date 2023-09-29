@@ -6,15 +6,15 @@
 #include "deck.h"
 #include <time.h>
 
-int random() {
+int random() { 
     int r = rand() % 3; // gera binario aleatorio baseado na seed incializada na primeira chamada.
 
-    return r; // retorna aleatorio entre (0,1).
+    return r; // retorna aleatorio entre (0,2).
 }
 
 void gerar_seed(){
     int seed = time(NULL);
-    printf("seed :%d\n-----------------\n", seed);
+    printf("seed :%d\n-----------------\n\n", seed);
     srand(seed); // semente gerada 
 }
 
@@ -52,8 +52,8 @@ void mostrarAcao(int rodada){
     }
 
     if(rodada == 2){
-        movSelect = mov[random()]; // random
-        ValSelect = val[random()]; // random
+        movSelect = mov[random()]; // Define o movimento do monstro de maneira aleatoria.
+        ValSelect = val[random()]; // Define o valor do movimento de maneira aleatoria.
     }
     else{
         movSelect = mov[rodada-1];

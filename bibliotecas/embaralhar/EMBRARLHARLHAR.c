@@ -20,35 +20,49 @@ void DeclaraDeck(tp_deck *h) {
     a2.custo = 2;
 
     tp_carta a3;
-    a3.carta_id = 5;
+    a3.carta_id = 3;
     a3.valor = 4;
     a3.tipo = 1;
     a3.custo = 1;
 
+    tp_carta a4;
+    a4.carta_id = 4;
+    a4.valor = 6;
+    a4.tipo = 1;
+    a4.custo = 3;
+
     tp_carta d1;
-    d1.carta_id = 3;
+    d1.carta_id = 5;
     d1.valor = 3;
     d1.tipo = 2;
     d1.custo = 2;
 
     tp_carta d2;
-    d2.carta_id = 4;
+    d2.carta_id = 6;
     d2.valor = 2;
     d2.tipo = 2;
     d2.custo = 1;
 
     tp_carta d3;
-    d3.carta_id = 6;
+    d3.carta_id = 7;
     d3.valor = 7;
     d3.tipo = 2;
     d3.custo = 3;
 
-    push(d1,h);
-    push(d2,h);
-    push(a1,h);
-    push(a2,h);
-    push(a3,h);
+    tp_carta d4;
+    d4.carta_id = 8;
+    d4.valor = 9;
+    d4.tipo = 2;
+    d4.custo = 4;
+
+    push(d4,h);
     push(d3,h);
+    push(d2,h);
+    push(d1,h);
+    push(a4,h);
+    push(a3,h);
+    push(a2,h);
+    push(a1,h);
 }
 
 int random() { // cada chamada gera um random diferente.
@@ -59,7 +73,7 @@ int random() { // cada chamada gera um random diferente.
 
 void gerar_seed(){
     int seed = time(NULL);
-    printf("seed :%d\n", seed);
+    printf("\n-----------------\nseed :%d\n-----------------\n", seed);
     srand(seed); // semente gerada 
 }
 
