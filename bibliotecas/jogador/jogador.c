@@ -34,25 +34,56 @@ void imprimirEfeito(char *txt , int intervalo){
     }
 }
 
+
 void saphira(personagem *p){
-	p->vida += 5; //beneficio do personagem
+	strcpy(p->nome , "Saphira");//declarando o nome do personagem como Saphira através da funcao "strcpy"
+	p->vida += 15; //beneficio do personagem
 }
 
+
 void grimgar(personagem *p){
+	strcpy(p->nome , "Grimgar");//declarando o nome do personagem como Saphira através da funcao "strcpy"
 	p->energia ++; //beneficio do personagem
 }
 
-void Iniciar(){
+
+
+void Iniciar(personagem *p){
+	int aux;
 	//Funcao para o inicio do jogo
 
 	system("cls"); // limpa o terminal
 	imprimirEfeito("Esses sao os personagens do jogo!!" , 38);
 	printf("\n");
-	imprimirEfeito("Saphira, fada da lua - Uma fada da lua misteriosa, protetora dos segredos noturnos e imagem de magia noturna e tranquilidade na floresta encantada. Poder de curandeira: Comece com mais 5 pontos de Vida\n\n" , 38);
+	imprimirEfeito("Saphira, fada da lua - Uma fada da lua misteriosa, protetora dos segredos noturnos e imagem de magia noturna e tranquilidade na floresta encantada. Poder de curandeira: Comece com mais 15 pontos de Vida\n\n" , 38);
 	imprimirEfeito("Grimgar, cavaleiro abissal - Um cavaleiro abissal e habilidoso, vestido com uma armadura negra e um elmo com chifres, cujo passado misterioso o torna temido e respeitado. Investida feroz: Adquira mais 1 ponto de energia\n\n" , 38);
 
-	
+	imprimirEfeito("Escolha seu personagem!!!\n" , 38);
+	printf("1 - Saphira\n");
+	printf("2 - Grimgar\n");
+
+
+	scanf("%d",&aux);
+	inicializa_personagem(p); // funcao criada para inicializar o personagem com os valores padroes de vida e energia
+
+	switch (aux)//switch para chamar as funcoes de acordo com a escolha do usuario
+	{
+		case 1:
+			saphira(p);//chama a funcao que declara o nome do personagem
+			imprimePersonagem(p);
+			break;
+		case 2:
+			grimgar(p);//chama a funcao que declara o nome do personagem
+			imprimePersonagem(p);
+			break;
+
+		default:
+			printf("[ERROR]");
+			break;
+	}
+		
 }
+
 
 void creditos(){
 
@@ -91,11 +122,8 @@ void creditos(){
 	
 }
 
-
-
-
 int main(){
-	int teclaMenu , aux; //variaveis
+	int teclaMenu; //variaveis
 	char nome_jogador[10];//variaveis
 
 	personagem p; //personagem
@@ -113,36 +141,13 @@ int main(){
 	Sleep(500);
 	printf("<ENTER> para Iniciar \n<ESC> para os creditos \n") ;//opcoes do menu
 	
-	teclaMenu = getch();	
+	teclaMenu = getch();//resgata a tecla 	
 	
 	
 	if(teclaMenu == 13){
-		Iniciar();
-		imprimirEfeito("Escolha seu personagem!!!\n" , 38);
-		printf("1 - Saphira\n");
-		printf("2 - Grimgar\n");
-
-
-		scanf("%d",&aux);
-		inicializa_personagem(&p); // funcao criada para inicializar o personagem com os valores padroes de vida e energia
-
-		switch (aux)//switch para chamar as funcoes de acordo com a escolha do usuario
-		{
-			case 1:
-				saphira(&p);
-				break;
-			case 2:
-				grimgar(&p);
-				break;
-
-			default:
-				break;
-		}
-		
-		printf("\nPontos de Vida: %d\n" , p.vida); // Comprovacao do funcionamento da criacao dos personagens e seus beneficios
-		printf("Pontos de energia: %d\n" , p.energia);
+		Iniciar(&p); //chamada do inicio do jogo
 	}
-	
+
 	if(teclaMenu == 27){
 		creditos();//chamada do creditos
 	}		

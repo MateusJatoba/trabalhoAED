@@ -5,6 +5,7 @@
 
 typedef struct 
 {
+    char nome[10];
     int vida;
     int energia;
     int deckPrincipal[5]; 
@@ -23,10 +24,15 @@ typedef struct { /*criando strutura do tipo deck*/
     int topo; /*topo da pilha*/
 }tp_deck;
 
-void inicializa_personagem(personagem * p){
-
+void inicializa_personagem(personagem * p){//inicializacao do personagem
     p->vida = 20;
     p->energia = 3;
+}
+
+void imprimePersonagem(personagem *p){
+	printf("\n%s\n" , p->nome);
+	printf("Pontos de vida: %d\n" , p->vida);
+	printf("Pontos de energia: %d\n" , p->energia);
 }
 
 void inicializa_deck(tp_deck *p){
