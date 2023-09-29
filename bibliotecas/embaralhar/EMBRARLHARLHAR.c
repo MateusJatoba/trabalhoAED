@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "deck.h"
+#include <conio.h>
 
 
 void DeclaraDeck(tp_deck *h) {
@@ -108,7 +109,7 @@ int main(){
 
     switch (s)
     {
-    case 13:
+    case 13: // 13 = num de id ENTER.
         printf("\n VAMOS EMBARALHAR !\n");
         embaralha_deck(&h);
         break;
