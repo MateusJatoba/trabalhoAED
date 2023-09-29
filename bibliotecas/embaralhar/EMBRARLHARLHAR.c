@@ -94,7 +94,7 @@ void embaralha_deck(tp_deck *h){ //recebe um deck e retorna o mesmo embaralhado.
 }
 
 int main(){
-
+    char s;
     tp_deck h;
 
     inicializa_deck(&h);
@@ -103,9 +103,20 @@ int main(){
 
     ver_deck(&h);
 
-    printf("\nEMBARALHAR !\n");
+    printf("\nQuer Embaralhar? DIGITE <ENTER> !!!\n");
+    s = getch();
 
-    embaralha_deck(&h);
+    switch (s)
+    {
+    case 13:
+        printf("\n VAMOS EMBARALHAR !\n");
+        embaralha_deck(&h);
+        break;
+    
+    default:
+        break;
+    }
+    
 
     ver_deck(&h);
 
