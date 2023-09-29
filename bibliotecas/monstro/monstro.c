@@ -46,15 +46,15 @@ void mostrarAcao(int rodada){
     int ValSelect; // Valor de cada movimento
     char mov[3] = {'a','d','e'};
     int val[3] = {6,8,3};
-    int x;
+    
 
     if(rodada > 3){ // passou do numero MAX de movimentos
         rodada = rodada-3;
     }
 
     if(rodada == 2){
-        movSelect = mov[x = random()]; // random
-        ValSelect = val[x = random()]; // random
+        movSelect = mov[random()]; // random
+        ValSelect = val[random()]; // random
     }
     else{
         movSelect = mov[rodada-1];
