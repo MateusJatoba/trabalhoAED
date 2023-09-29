@@ -94,7 +94,6 @@ void mostrarAcao(int rodada){
     }
 
     passarRodada(); //novo chamado para que n precise de uma estrutura de repeticao
-   
 }
 
 

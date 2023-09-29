@@ -8,7 +8,7 @@ void DeclaraDeck(tp_deck *h) {
 
     tp_carta a1;
     a1.carta_id = 1;
-    a1.valor = rand() % 20;
+    a1.valor = 3;
     a1.tipo = 1;
     a1.custo = 1;
 
@@ -50,8 +50,8 @@ void DeclaraDeck(tp_deck *h) {
     push(d3,h);
 }
 
-int random() {
-    int r = rand() % 2; // gera binario aleatorio baseado na seed incializada na primeira chamada.
+int random() { // cada chamada gera um random diferente.
+    int r = rand() % 2; // gera int "pseudo"aleatório baseado na seed incializada na primeira chamada.
 
     return r; // retorna aleatorio entre (0,1).
 }
