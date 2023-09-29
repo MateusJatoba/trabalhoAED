@@ -5,9 +5,8 @@
 
 typedef struct 
 {
-    char nome[30]
-    int vida = 75;
-    int energia = 3;
+    int vida;
+    int energia;
     int deckPrincipal[5]; 
 } personagem;
 
@@ -23,6 +22,12 @@ typedef struct { /*criando strutura do tipo deck*/
     tp_carta carta[MAX]; /*vetor de tamanho MAX do tipo carta*/
     int topo; /*topo da pilha*/
 }tp_deck;
+
+void inicializa_personagem(personagem * p){
+
+    p->vida = 20;
+    p->energia = 3;
+}
 
 void inicializa_deck(tp_deck *p){
     p->topo = -1; /*definindo que o deck está pronto*/
