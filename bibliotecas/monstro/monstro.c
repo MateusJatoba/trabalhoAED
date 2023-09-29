@@ -14,12 +14,12 @@ int random() {
 
 void gerar_seed(){
     int seed = time(NULL);
-    printf("seed :%d\n\n", seed);
+    printf("seed :%d\n-----------------\n", seed);
     srand(seed); // semente gerada 
 }
 
 void mostrarMonstro(tp_monstro *m){
-    if(m->monster_id == 1){//Montro 1 tem nome de JEFF
+    if(m->monster_id == 1){//Monstro 1 tem nome de JEFF
         m->vida = 100; // declarando a vida do monstro
         m->moveset = 1;
         printf("JEFF");
@@ -33,7 +33,6 @@ void mostrarMonstro(tp_monstro *m){
         printf("JHONNY\n");
         printf("VIDA: %d" , m->vida);
     }
-    
 }
 
 void mostrarAcao(int rodada){
