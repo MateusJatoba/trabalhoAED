@@ -4,7 +4,7 @@
 #include <locale.h> //biblioteca que permite o uso do 'setlocale()'
 #include <windows.h> //biblioteca que permite o uso do "Sleep()"
 #include <unistd.h> //biblioteca que permite o uso do "usleep()" dos creditos
-#include "deck.h"
+#include "jogadordeck.h"
 
 
 

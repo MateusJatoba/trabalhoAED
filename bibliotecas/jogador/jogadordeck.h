@@ -1,15 +1,16 @@
-#ifndef DECK_H
-#define DECK_H
+#ifndef JOGADORDECK_H
+#define JOGADORDECK_H
 #include <stdio.h>
 #define MAX 100
 
-
 typedef struct 
 {
-    int monster_id;
+    char nome[10];
     int vida;
-    int moveset; // id da lista de movimentos do monstro
-} tp_monstro;
+    int energia;
+    int deckPrincipal[5]; 
+} personagem;
+
 
 typedef struct { /*criando strutura do tipo  carta*/
     int carta_id; /*numeração da carta*/
@@ -22,6 +23,17 @@ typedef struct { /*criando strutura do tipo deck*/
     tp_carta carta[MAX]; /*vetor de tamanho MAX do tipo carta*/
     int topo; /*topo da pilha*/
 }tp_deck;
+
+void inicializa_personagem(personagem * p){//inicializacao do personagem
+    p->vida = 20;
+    p->energia = 3;
+}
+
+void imprimePersonagem(personagem *p){
+	printf("\n%s\n" , p->nome);
+	printf("Pontos de vida: %d\n" , p->vida);
+	printf("Pontos de energia: %d\n" , p->energia);
+}
 
 void inicializa_deck(tp_deck *p){
     p->topo = -1; /*definindo que o deck está pronto*/

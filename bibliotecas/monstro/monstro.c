@@ -3,7 +3,7 @@
 #include <conio.h> // biblioteca que permite o uso do 'getch()'
 #include <locale.h> //biblioteca que permite o uso do 'setlocale()'
 #include <windows.h> 
-#include "deck.h"
+#include "monstrodeck.h"
 #include <time.h>
 
 int random() { 
