@@ -5,7 +5,7 @@
 
 typedef struct 
 {
-    char nome[30];
+    char nome[30]
     int vida = 75;
     int energia = 3;
     int deckPrincipal[5]; 
