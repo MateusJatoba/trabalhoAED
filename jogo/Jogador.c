@@ -9,6 +9,7 @@
 
 
 
+
 void imprimirEfeito(char *txt , int intervalo){ 
 
 // Botei esse efeito para ficar mais apresent�vel. Quando quiser uma frase com um efeito, bota essa fun��o com o par�metro do intervalo
