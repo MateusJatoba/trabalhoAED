@@ -422,16 +422,16 @@ void combate123() {
     rodadas(e, &p, mao_jogador_ptr, &m, &movfila, &valfila);
 }
 
-// void caminho123(){
-//     tp_listase *lista;
-//     personagem p;
-//     inicializa_personagem(&p);
-//     criar_caminho(&lista , &p);
-//     imprime_listase(lista);
-// }
+void caminho123(){
+    tp_listase_cam *lista;
+    personagem p;
+    inicializa_personagem(&p);
+    criar_caminho(&lista , &p);
+    imprime_listase(lista);
+}
 
 int main(){
     criar_jogador();
-    // caminho123();
+    caminho123();
     // combate123();
 }
