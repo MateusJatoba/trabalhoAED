@@ -713,4 +713,25 @@ void criar_caminho(tp_listase_cam **lista , personagem *p){ //funcao para a cria
 }
 
 
+void gravar_disco(char f[] , tp_deck *deck){ // recebe o nome do arquivo e o deck como paramtero
+    FILE *file = fopen(f , "w"); // abre o arquivo
+
+    if (file == NULL) // controle de erro 
+    {
+        printf("Erro ao gravar as cartas");
+    }
+    
+
+    else{
+        printf("\nGravou as cartas\n");
+        for(int i = 0 ; i < 8 ; i++){ // substituir o número 8 pela quantidade de cartas jogadas pelo jogador
+            fprintf(file , "Id da carta: %d\nTipo: %d\nValor: %d\nCusto ao Jogador: %d\n\n-------------------------------------------------------------\n\n" , deck->carta[i].carta_id , deck->carta[i].tipo , deck->carta[i].valor , deck->carta[i].valor); // resgatando cada valor e printando no arquivo
+
+        }
+        
+        fclose(file); // fechando o arquivo
+    }
+    
+}
+
 #endif

@@ -431,6 +431,7 @@ void caminho123(){
 }
 
 int main(){
+    char nome[] = {"teste.txt"}; // passar essa string "nome" como parâmetro na funcao gravar disco
     // criar_jogador();
     caminho123();
     // combate123();
