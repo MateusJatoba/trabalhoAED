@@ -423,15 +423,15 @@ void combate123() {
 }
 
 void caminho123(){
-    tp_listase_cam *lista;
+    tp_listase_cam *lista = NULL;
     personagem p;
     inicializa_personagem(&p);
     criar_caminho(&lista , &p);
-    imprime_listase(lista);
+    // imprime_caminho(lista);
 }
 
 int main(){
-    criar_jogador();
+    // criar_jogador();
     caminho123();
     // combate123();
 }

@@ -612,6 +612,7 @@ void descanso(personagem *p){
 	
 }
 
+
 void combate(){
     printf("\nChamada do combate\n\n");
 }
@@ -620,79 +621,96 @@ void combate_boss(){
     printf("\nChamada do combate do chefe\n");
 }
 
-void criar_caminho(tp_listase_cam **lista , personagem *p){ //funcao para a criacao do caminho
-    char aux;
-    *lista = inicializa_listase(); //caminho eh uma listase
-    insere_listase_no_fim(lista, 'C'); // definindo o primeiro passo do caminho - combate obrigatorio
-    
-    combate();
-
-    printf("Defina seu proximo passo:\n[D] - Descanso\n[C] - Combate\n"); 
-    scanf(" %c", &aux); // opcao de escolha, descanso ou outro combate
-    aux = tolower(aux); //controle de erro do usuario
-    
-    if (aux == 'd') //caminho com o descanso
+void imprime_caminho(char vet[5]){
+	for (int i = 0; i < 5; i++)
     {
-        insere_listase_no_fim(lista , 'D');
-
-        descanso(p) ;
-
-        insere_listase_no_fim(lista , 'C');
-
-        combate();
-        printf("Defina seu proximo passo:\n[D] - Descanso\n[C] - Combate\n"); 
-        scanf(" %c", &aux); // opcao de escolha, descanso ou outro combate
-        aux = tolower(aux); //controle de erro do usuario
-
-        if (aux == 'd')
-        {
-            insere_listase_no_fim(lista , 'D');
-            descanso(p);
-            insere_listase_no_fim(lista , 'B');
-            combate_boss();
-        }
-
-        else{
-            insere_listase_no_fim(lista , 'C');
-            combate();
-
-            insere_listase_no_fim(lista , 'B');
-            combate_boss();
-        }
-        
-        
+        printf("%c " , vet[i]);
     }
-    
-    else{ //caminho sem o descanso
-
-        
-        insere_listase_no_fim(lista , 'C');
-        combate();
-        insere_listase_no_fim(lista , 'C');
-        combate();
-        
-        printf("Defina seu proximo passo:\n[D] - Descanso\n[C] - Combate\n"); 
-        scanf(" %c", &aux); // opcao de escolha, descanso ou outro combate
-        aux = tolower(aux); //controle de erro do usuario
-
-        if (aux == 'd')
-        {
-            insere_listase_no_fim(lista , 'D');
-            descanso(p);
-            insere_listase_no_fim(lista , 'B');
-            combate_boss();
-        }
-
-        else{
-            insere_listase_no_fim(lista , 'C');
-            combate();
-
-            insere_listase_no_fim(lista , 'B');
-            combate_boss();
-        }
-    }
-
     
 }
+
+void criar_caminho(tp_listase_cam **lista , personagem *p){ //funcao para a criacao do caminho
+    // inicializa_caminho(&lista);
+    // lista = inicializa_listase(); //caminho eh uma listase
+    insere_listase_no_fim(lista , 'C'); // definindo o primeiro passo do caminho - combate obrigatorio
+    insere_listase_no_fim(lista , 'C');
+    insere_listase_no_fim(lista , 'C');
+    insere_listase_no_fim(lista , 'D');
+    insere_listase_no_fim(lista , 'B');
+    tp_listase_cam *atu;
+    
+    char vet[5];
+    atu = *lista;
+    int verifica = 0;
+    // vet[0] = 'C';
+
+    while (atu!=NULL)
+    {
+        if (atu->info == 'C')
+        {
+            combate();
+            vet[verifica] = 'C';
+            verifica ++;
+        }
+
+        else if(atu->info == 'D'){
+            descanso(p);
+            vet[verifica] = 'D';
+            verifica ++;
+        }
+        
+        else if(atu->info == 'B'){
+            vet[verifica] = 'B';
+            combate_boss();
+        }
+
+        if (verifica == 1)
+        {
+            char escolha;
+            printf("Desvio a frente!!! Escolha seu proximo movimento:\n[D] - Descanso\n[C] - Combate\n");
+
+            scanf("%c" , &escolha);
+            if (tolower(escolha) == 'd')
+            {   
+                tp_listase_cam *desvio;
+                desvio = aloca_listase_cam();
+                desvio->info = 'D';
+                atu = atu->prox;
+                desvio->prox = atu->prox;
+
+                atu->prox = desvio;
+                vet[verifica] = 'D';
+            }
+            
+        }
+
+        if (verifica == 3)
+        {
+            char escolha2;
+            printf("Desvio a frente!!! Escolha seu proximo movimento:\n[D] - Descanso\n[C] - Combate\n");
+
+            scanf(" %c" , &escolha2);
+            if (tolower(escolha2) == 'c')
+            {   
+                tp_listase_cam *desvio2;
+                desvio2 = aloca_listase_cam();
+                desvio2->info = 'C';
+                atu = atu->prox;
+                desvio2->prox = atu->prox;
+
+                atu->prox = desvio2;
+                vet[verifica] = 'C';
+            }
+        }
+        // vet[verifica] = atu->info;
+        atu = atu->prox;
+
+        
+    }
+
+    imprime_caminho(vet);
+    
+}
+
 
 #endif
