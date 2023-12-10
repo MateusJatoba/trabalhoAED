@@ -12,6 +12,7 @@
 #define TAMANHO_FILA 10
 
 int numero_combate = 1;
+int qnt_cartas_jogadas = 0;
 
 // MAO.h --------------------------------------------------------------------------------
 
@@ -818,6 +819,26 @@ void ataque_monstro(personagem *p, tp_monstro *m, int movfila, int valfila) {
     p->defesa = 0;
 }
 
+void checar_vitoria(personagem *p,tp_monstro *m){
+    Sleep(300);
+    if(p->vida == 0){
+        printf("\nGAME OVER");
+        printf("\nJOGADOR VOCE PERDEU O COMBATE\n");
+        Sleep(1000);
+    }
+    else if(numero_combate==5 && m->vida){
+        printf("\nVOCE VENCEU");
+        printf("\nBOA BATALHA!\n");
+        Sleep(1000);
+        creditos();
+    }
+    else{
+        printf("\nVOCE VENCEU");
+        printf("\nBOA BATALHA!\n");
+        Sleep(1000);
+    }
+}
+
 void rodadas(tp_carta e, personagem *p, tp_mao *mao, tp_monstro *m, tp_fila *movfila, tp_fila *valfila) {
     int mov;
     int val;
@@ -841,7 +862,10 @@ void rodadas(tp_carta e, personagem *p, tp_mao *mao, tp_monstro *m, tp_fila *mov
         i++;
     }
 
+    checar_vitoria(p,m);
+
     system("pause");  // Pausa a execução para visualização dos resultados
+
 }
 
 void criar_jogador(){
@@ -1085,14 +1109,17 @@ void descanso(personagem *p){
 }
 
 void combate(){
+    system("cls");
     printf("\nChamada do combate\n\n");
     combate123(numero_combate);
     numero_combate += 1;
 }
 
 void combate_boss(){
+    system("cls");
     printf("\nChamada do combate do chefe\n");
-    combate123(5);
+    numero_combate = 5;
+    combate123(numero_combate);
 }
 
 void imprime_caminho(char vet[5]){
@@ -1103,82 +1130,67 @@ void imprime_caminho(char vet[5]){
     
 }
 
-void criar_caminho(tp_listase_cam **lista , personagem *p){ //funcao para a criacao do caminho
-    // inicializa_caminho(&lista);
-    // lista = inicializa_listase(); //caminho eh uma listase
-    insere_listase_no_fim(lista , 'C'); // definindo o primeiro passo do caminho - combate obrigatorio
-    insere_listase_no_fim(lista , 'C');
-    insere_listase_no_fim(lista , 'C');
-    insere_listase_no_fim(lista , 'D');
-    insere_listase_no_fim(lista , 'B');
-    tp_listase_cam *atu;
-    
-    char vet[5];
-    atu = *lista;
-    int verifica = 0;
-    // vet[0] = 'C';
+void criar_caminho(tp_listase_cam **lista, personagem *p) {
+    insere_listase_no_fim(lista, 'C'); // Primeiro passo do caminho - combate obrigatório
+    insere_listase_no_fim(lista, 'C');
+    insere_listase_no_fim(lista, 'C');
+    insere_listase_no_fim(lista, 'D');
+    insere_listase_no_fim(lista, 'B');
 
-    while (atu!=NULL)
-    {
-        if (atu->info == 'C')
-        {
+    tp_listase_cam *atu = *lista;
+    char vet[5];
+    int verifica = 0;
+
+    while (atu != NULL) {
+        if (atu->info == 'C') {
             combate();
             vet[verifica] = 'C';
-            verifica ++;
-        }
-
-        else if(atu->info == 'D'){
+            verifica++;
+        } else if (atu->info == 'D') {
             descanso(p);
             vet[verifica] = 'D';
-            verifica ++;
-        }
-        
-        else if(atu->info == 'B'){
-            vet[verifica] = 'B';
+            verifica++;
+        } else if (atu->info == 'B') {
             combate_boss();
+            vet[verifica] = 'B';
+            verifica++;
         }
 
-        if (verifica == 1)
-        {
+        if (verifica == 1) {
             char escolha;
             printf("Desvio a frente!!! Escolha seu proximo movimento:\n[D] - Descanso\n[C] - Combate\n");
+            scanf(" %c", &escolha);
 
-            scanf("%c" , &escolha);
-            if (tolower(escolha) == 'd')
-            {   
-                tp_listase_cam *desvio;
-                desvio = aloca_listase_cam();
+            if (tolower(escolha) == 'd') {
+                tp_listase_cam *desvio = aloca_listase_cam();
                 desvio->info = 'D';
-                atu = atu->prox;
                 desvio->prox = atu->prox;
 
                 atu->prox = desvio;
                 vet[verifica] = 'D';
+                verifica++;
             }
-            
         }
 
-        if (verifica == 3)
-        {
+        if (verifica == 3) {
             char escolha2;
             printf("Desvio a frente!!! Escolha seu proximo movimento:\n[D] - Descanso\n[C] - Combate\n");
+            scanf(" %c", &escolha2);
 
-            scanf(" %c" , &escolha2);
-            if (tolower(escolha2) == 'c')
-            {   
-                tp_listase_cam *desvio2;
-                desvio2 = aloca_listase_cam();
+            if (tolower(escolha2) == 'c') {
+                tp_listase_cam *desvio2 = aloca_listase_cam();
                 desvio2->info = 'C';
-                atu = atu->prox;
                 desvio2->prox = atu->prox;
 
                 atu->prox = desvio2;
                 vet[verifica] = 'C';
+                verifica++;
             }
         }
-        // vet[verifica] = atu->info;
-        atu = atu->prox;
 
+        if (verifica < 5) {
+            atu = atu->prox;
+        }
     }
 
     imprime_caminho(vet);
@@ -1193,6 +1205,6 @@ void caminho123(){
 }
 
 int main(){
-    criar_jogador();
+   // criar_jogador();
     caminho123();
 }
