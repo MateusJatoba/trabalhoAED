@@ -1161,7 +1161,6 @@ void criar_caminho(tp_listase_cam **lista , personagem *p){ //funcao para a cria
     char vet[5];
     atu = *lista;
     int verifica = 0;
-    // vet[0] = 'C';
 
     while (atu!=NULL)
     {
@@ -1187,8 +1186,8 @@ void criar_caminho(tp_listase_cam **lista , personagem *p){ //funcao para a cria
         {
             char escolha;
             printf("Desvio a frente!!! Escolha seu proximo movimento:\n[D] - Descanso\n[C] - Combate\n");
-            scanf("%c" , &escolha);
-            if (tolower(escolha) == 'd')
+            scanf(" %c" , &escolha);
+            if (escolha == 'd')
             {   
                 tp_listase_cam *desvio;
                 desvio = aloca_listase_cam();
@@ -1207,7 +1206,7 @@ void criar_caminho(tp_listase_cam **lista , personagem *p){ //funcao para a cria
             char escolha2;
             printf("Desvio a frente!!! Escolha seu proximo movimento:\n[D] - Descanso\n[C] - Combate\n");
             scanf(" %c" , &escolha2);
-            if (tolower(escolha2) == 'c')
+            if (escolha2 == 'c')
             {   
                 tp_listase_cam *desvio2;
                 desvio2 = aloca_listase_cam();
@@ -1219,7 +1218,7 @@ void criar_caminho(tp_listase_cam **lista , personagem *p){ //funcao para a cria
                 vet[verifica] = 'C';
             }
         }
-        // vet[verifica] = atu->info;
+        
         atu = atu->prox;
 
         
