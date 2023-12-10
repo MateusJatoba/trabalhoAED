@@ -640,10 +640,6 @@ void status_Player(personagem *p, tp_mao *mao){ // função para mostrar a vida 
     
     imprimePersonagem(p);
     printf("\n---------------------------------CARTAS---------------------------------\n");
-
-    printf("\n\nLegenda das cartas:\n[Tipo 1] - Ataque\n[Tipo 2] - Defesa\n");
-
-    printf("\n-----------------------\n");
     imprime_mao(mao);
 }
 
@@ -845,6 +841,7 @@ void checar_vitoria(tp_monstro *m){
         printf("\nGAME OVER");
         printf("\nJOGADOR VOCE PERDEU O COMBATE\n");
         Sleep(1000);
+        exit(0);
     }
 
     else if(numero_combate==5){
@@ -868,6 +865,11 @@ void rodadas(tp_carta e, personagem *p, tp_mao *mao, tp_monstro *m, tp_fila *mov
     int i = 0;
     popula_fila(movfila, valfila);
 
+    if(numero_combate == 5)
+        printf("|FASE = CHEFE FINAL|\n");
+    else
+        printf("|FASE = %d|\n", numero_combate);
+
     while (p->vida > 0 && m->vida > 0) {
 
         cava(&mao, e);
@@ -888,6 +890,7 @@ void rodadas(tp_carta e, personagem *p, tp_mao *mao, tp_monstro *m, tp_fila *mov
 
     system("pause");  // Pausa a execução para visualização dos resultados
 
+    printf("\n");
 }
 
 void criar_jogador(){
@@ -1077,6 +1080,7 @@ void destroi_listase(tp_listase_cam **l){
 	*l = NULL;
 
 }
+
 int listase_igual(tp_listase_cam *l1, tp_listase_cam *l2){
 	tp_listase_cam *atu1, *atu2;
 	atu1=l1;
@@ -1091,7 +1095,6 @@ int listase_igual(tp_listase_cam *l1, tp_listase_cam *l2){
 		}
 		return 1;
 }
-
 
 void descanso(personagem *p){
     int aux = 0;
@@ -1128,16 +1131,18 @@ void descanso(personagem *p){
 		}
 	}
 	
+    Sleep(1000);
+    system("cls");
 }
-
 
 void combate(){
     combate123(numero_combate);
-    printf("\nChamada do combate\n\n");
+    numero_combate += 1;
 }
 
 void combate_boss(){
-    printf("\nChamada do combate do chefe\n");
+    numero_combate = 5;
+    combate123(numero_combate);
 }
 
 void imprime_caminho(char vet[5]){
@@ -1237,6 +1242,6 @@ void caminho123(){
 }
 
 int main(){
-   // criar_jogador();
+    criar_jogador();
     caminho123();
 }
