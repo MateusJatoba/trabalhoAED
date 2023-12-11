@@ -14,8 +14,10 @@
 #define TAMANHO_MAX 100
 #define TAMANHO_FILA 10
 
+char arq[] = {"soussa.txt"};
 int numero_combate = 1;
 int qnt_cartas_jogadas = 0;
+
 
 // MAO.h --------------------------------------------------------------------------------
 
@@ -268,6 +270,28 @@ typedef struct {
     int topo;
 } tp_deck;
 
+// GRAVANDO EM DISCO ----------------------------
+
+void gravar_disco(char f[] , tp_deck *deck){ // recebe o nome do arquivo e o deck como paramtero
+    FILE *file = fopen(f , "w"); // abre o arquivo
+
+    if (file == NULL) // controle de erro 
+    {
+        printf("Erro ao gravar as cartas");
+    }
+    
+
+    else{
+        //printf("\nGravou as cartas\n");
+        for(int i = 0 ; i < qnt_cartas_jogadas ; i++){ 
+            fprintf(file , "Id da carta: %d\nTipo: %d\nValor: %d\nCusto ao Jogador: %d\n\n-------------------------------------------------------------\n\n" , deck->carta[i].carta_id , deck->carta[i].tipo , deck->carta[i].valor , deck->carta[i].valor); // resgatando cada valor e printando no arquivo
+
+        }
+        
+        fclose(file); // fechando o arquivo
+    }
+}
+
 void inicializa_deck(tp_deck *p) {
     p->topo = -1;
 }
@@ -495,7 +519,6 @@ void retorna_deck(tp_deck *descarte, tp_deck *h, tp_carta e) {
 #include <locale.h> //biblioteca que permite o uso do 'setlocale()'
 #include <windows.h> //biblioteca que permite o uso do "Sleep()"
 #include <unistd.h> //biblioteca que permite o uso do "usleep()" dos creditos
-#include "JOGO_BETA.h"
 
 void imprimirEfeito(char *txt , int intervalo){ 
 
@@ -528,7 +551,7 @@ void Iniciar(){
 	system("cls"); // limpa o terminal
 	imprimirEfeito("Esses sao os personagens do jogo!!" , 38);
 	printf("\n");
-	imprimirEfeito("Grimgar, cavaleiro abissal - Um cavaleiro abissal e habilidoso, vestido com uma armadura negra e um elmo com chifres, cujo passado misterioso o torna temido e respeitado. Investida feroz: Adquira mais 1 ponto de energia\n\n" , 38);
+	imprimirEfeito("Grimgar, cavaleiro abissal - Um cavaleiro abissal e habilidoso, vestido com uma armadura negra\ne um elmo com chifres, cujo passado misterioso o torna temido e respeitado.\n\n (Investida feroz: Adquira mais 1 ponto de energia)\n\n" , 38);
 }
 
 void creditos(){
@@ -847,7 +870,7 @@ void checar_vitoria(tp_monstro *m){
     else if(numero_combate==5){
         printf("\nVOCE VENCEU O CHEFE FINAL!");
         printf("\nBOA BATALHA! AQUI SE ENCERRA SUA JORNADA!\n");
-        Sleep(1000);
+        Sleep(3000);
         creditos();
     }
 
@@ -935,6 +958,7 @@ void criar_jogador(){
 		
 		printf("\nPontos de Vida: %d\n" , p.vida); // Botei isso aqui p ver se as funcoes estavam funcionando
 		printf("Pontos de energia: %d\n" , p.energia);
+        system("cls");
 	}
 	
 	if(teclaMenu == 27){
@@ -953,6 +977,9 @@ void combate123(int fase) {
     inicializa_deck(&h);
     DeclaraDeck(&h);
     embaralha_deck(&h);
+
+    // gravar
+    gravar_disco(arq , &h);
 
     tp_mao mao_jogador;
     tp_mao *mao_jogador_ptr = &mao_jogador;
